@@ -17,11 +17,13 @@ public class BoletoController {
     @Autowired
     private GeraBoleto geraBoleto;
 
+    @CrossOrigin
     @GetMapping("/ListaBoleto")
     public List<Boleto> ListarBoletos() {
         return (List<Boleto>) boletoRepository.findAll();
     }
 
+    @CrossOrigin
     @RequestMapping(
             value = "/GeraBoleto",
             method = RequestMethod.POST)
@@ -42,16 +44,19 @@ public class BoletoController {
                 return add;
     }
 
+    @CrossOrigin
     @GetMapping("/ListaBoleto/{id}")
     public List<Boleto> BoletosCliente(@PathVariable int id) throws Exception {
         return boletoRepository.findByClienteCliId(id);
     }
 
-    @GetMapping("/ListaBoleto/{status}")
+    @CrossOrigin
+    @GetMapping("/ListaBoletoSt/{status}")
     public List<Boleto> BoletosStatus(@PathVariable String status) throws Exception {
         return boletoRepository.findByBolStatus(status);
     }
 
+    @CrossOrigin
     @GetMapping("/totalNP/{filtro}")
     public Float selectTotal(@PathVariable String filtro) {
         return boletoRepository.selectTotals(filtro);
